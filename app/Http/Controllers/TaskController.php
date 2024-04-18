@@ -19,6 +19,7 @@ class TaskController extends Controller
     {
         $task = Task::with('assignedTo')->where('title', 'LIKE', '%'.$request->searching.'%')
         ->orWhere('description', 'LIKE', '%'.$request->searching.'%')->get();
+
         return response()->json([
             'task' => $task,
         ]);

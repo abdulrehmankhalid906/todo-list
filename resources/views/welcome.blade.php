@@ -45,7 +45,7 @@
                     </div>
                 </div>
 
-                <div class="row" id="display-todo">
+                <div class="row" id="display_todo">
                     {{-- @dd($tasks) --}}
                     @if(count($tasks)>0)
                         @foreach ($tasks as $task)
@@ -88,7 +88,9 @@
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="{{ asset('frontend/js/scripts.js') }}"></script>
-        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+        {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> --}}
+
+
         <script>
             $(document).ready(function(){
                 $('#logout-btn').click(function(){
@@ -103,23 +105,39 @@
                     $.ajax({
                         url: "{{ route('searchTasks') }}",
                         type: "GET",
+                        dataType: "json",
                         data:
                         {
                             'searching': value
                         },
 
-                        success:function(task){
-                            // $('#display-todo').empty();
-                            console.log(task);
-                        },
-
-                        error:function()
+                        success:function(task)
                         {
+                            $('#display_todo').empty();
+                            $.each(task, function(index, data){
+                                console.log(data);
 
+                                var assignedToName = data.assigned_to ? data.assigned_to.name : 'Not Assigned';
+
+                                var newRow = `
+                                <div class="row">
+                                    <div class="col-lg-4 mt-2">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title"><h5>Title:</h5>${data.title}</h5>
+                                                <p class="card-text"><h5>Description:</h5>${data.description}</p>
+                                                <p class="card-text"><h5>Posted By:</h5>${data.user_id}</p>
+                                                <p class="card-text"><h5>Assigned To:</h5>${assignedToName}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `;
+
+                                var $newRow = $(newRow);
+                                $('#display_todo').append($newRow);
+                            });
                         }
-
-                });
-
+                    });
                 });
             });
         </script>
