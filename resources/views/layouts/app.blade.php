@@ -29,20 +29,39 @@
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
         <script src="{{ asset('dashboard/js/datatables-simple-demo.js') }}"></script>
         <script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-
+        
         <script>
             $(document).ready(function(){
+
+                //Logout Button
                 $('#logout-btn').click(function(){
                     $('#logout-form').submit();
                 });
-            });
-        </script>
 
-        <script>
-            $(document).ready(function(){
+                //Datatable
                 let table = new DataTable('#myTable');
+
+                initMap();
             });
-        </script>
+
+
+            //Map Integration
+            let maps;
+            let activeInfoWindow;
+            let markers = [];
+
+            function initMap()
+            {
+                map = new google.maps.Map(document.getElementById("map"), {
+                    center: {
+                        lat: 72.23,
+                        lng: 34.90
+                    },
+                    zoom: 10
+                });
+            }
+        </script>    
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCY159aZnkp48EtppY_uQrohXre3vGr5h8&amp;libraries=places&amp;callback=initMap" async="" defer=""></script>
     </body>
 </html>
 

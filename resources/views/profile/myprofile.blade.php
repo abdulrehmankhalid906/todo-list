@@ -3,26 +3,33 @@
     <section style="background-color: #eee;">
         <div class="container mt-5">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-4">
                     <div class="card mb-4">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <p class="mb-0">Name</p>
+                                    <p class="mb-0">Name:</p>
                                 </div>
-                                <div class="col-sm-3">
+                                <div class="col-sm-9">
                                     <p class="text-muted mb-0">{{ Auth::user()->name }}</p>
                                 </div>
                             </div>
-                            <hr>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <p class="mb-0">Email</p>
+                                    <p class="mb-0">Email:</p>
                                 </div>
-                                <div class="col-sm-3">
+                                <div class="col-sm-9">
                                     <p class="text-muted mb-0">{{ Auth::user()->email }}</p>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-8">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div id="map" style="width:100%;"></div>
                         </div>
                     </div>
                 </div>
@@ -87,4 +94,6 @@
             </div>
         </div>
     </main>
+
+    
 @endsection

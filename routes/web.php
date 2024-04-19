@@ -21,6 +21,7 @@ Route::put('/view-task/{id}',[TaskController::class, 'updatePost'])->name('updat
 Route::get('/profile',[ProfileController::class, 'myprofile'])->name('profile-view');
 
 //Extras
+// Route::resource('tasks', HomeController::class);
 Route::get('/all-tasks',[HomeController::class, 'viewTasks'])->name('view-Tasks');
 Route::delete('/all-tasks/{id}',[HomeController::class, 'destroy'])->name('delete-Tasks');
 Route::get('/all-users',[HomeController::class, 'viewUsers'])->name('view-Users');
