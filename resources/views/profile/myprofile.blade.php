@@ -29,7 +29,7 @@
                 <div class="col-lg-8">
                     <div class="card mb-4">
                         <div class="card-body">
-                            <div id="map" style="width:100%;"></div>
+                            <div id="map"></div>
                         </div>
                     </div>
                 </div>
@@ -94,6 +94,4 @@
             </div>
         </div>
     </main>
-
-    
 @endsection

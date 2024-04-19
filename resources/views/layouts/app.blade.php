@@ -8,6 +8,13 @@
         <link rel="stylesheet" href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script src="https://kit.fontawesome.com/a9a5fe0466.js" crossorigin="anonymous"></script>
+
+        <style>
+            #map {
+                width : 100%;
+                height: 400px; 
+            }
+        </style>
     </head>
     <body class="sb-nav-fixed">
         <div id="layoutSidenav">
@@ -54,14 +61,14 @@
             {
                 map = new google.maps.Map(document.getElementById("map"), {
                     center: {
-                        lat: 72.23,
-                        lng: 34.90
+                        lat: 30.37,
+                        lng: 69.34
                     },
-                    zoom: 10
+                    zoom: 8  //the more number increasing the more it will be zooming..
                 });
             }
         </script>    
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCY159aZnkp48EtppY_uQrohXre3vGr5h8&amp;libraries=places&amp;callback=initMap" async="" defer=""></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAP_API') }}&amp;libraries=places&amp;callback=initMap" async></script>
     </body>
 </html>
 
