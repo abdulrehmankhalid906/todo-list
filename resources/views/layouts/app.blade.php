@@ -47,28 +47,8 @@
 
                 //Datatable
                 let table = new DataTable('#myTable');
-
-                initMap();
             });
-
-
-            //Map Integration
-            let maps;
-            let activeInfoWindow;
-            let markers = [];
-
-            function initMap()
-            {
-                map = new google.maps.Map(document.getElementById("map"), {
-                    center: {
-                        lat: 30.37,
-                        lng: 69.34
-                    },
-                    zoom: 8  //the more number increasing the more it will be zooming..
-                });
-            }
-        </script>    
-        <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAP_API') }}&amp;libraries=places&amp;callback=initMap" async></script>
+        </script>
     </body>
 </html>
 

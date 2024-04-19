@@ -94,4 +94,45 @@
             </div>
         </div>
     </main>
+
+    <script>
+        $(document).ready(function(){
+
+            initMap();
+        });
+
+        //Map Integration
+        let maps;
+        let activeInfoWindow;
+        let markers = [];
+
+        function initMap()
+        {
+            //Getting user lat and lng
+
+            var user_lat = {{ Auth::user()->lat }};
+            var user_lng = {{ Auth::user()->lng }};
+
+
+            //Main Map
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: {
+                    lat: user_lat,
+                    lng: user_lng
+                },
+                zoom: 5  //the more number increasing the more it will be zooming..
+            });
+
+            //Setting-up Marker
+            markers = new google.maps.Marker({
+                position: {
+                    lat: user_lat,
+                    lng: user_lng
+                },
+                map: map,
+                title: "Marker Title"
+            });
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAP_API') }}&amp;libraries=places&amp;callback=initMap" async></script>
 @endsection
