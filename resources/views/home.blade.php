@@ -2,7 +2,7 @@
 @section('content')
 <main>
     <div class="container-fluid px-4">
-        <h1 class="mt-4">Dashboard</h1>
+        <h3 class="mt-2">Dashboard</h3>
         <div class="row">
             <div class="col-xl-3 col-md-6">
                 <div class="card bg-primary text-white mb-4">
@@ -41,6 +41,71 @@
                 </div>
             </div>
         </div>
+
+        {{-- User's Map --}}
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div id="map"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </main>
+
+<script>
+    $(document).ready(function(){
+
+        initMap();
+
+    });
+
+    //we use let for globally access.
+    let maps;
+    let activeInfowindow;
+    let markers = [];
+
+    function initMap()
+    {
+        map = new google.maps.Map(document.getElementById("map"),{
+            center: {lat: 39.8103, lng: 69.4125},
+            zoom: 5,
+        });
+
+        var markers = [
+            {
+                position: { lat: 39.8103, lng: 69.4125 },
+                title: "User 1"
+            },
+
+            {
+                position: { lat: 41.8103, lng: 68.4125 },
+                title: "User 2"
+            },
+
+            {
+                position: { lat: 45.8103, lng: 65.4125 },
+                title: "User 3"
+            },
+
+            {
+                position: { lat: 42.8103, lng: 62.4125 },
+                title: "User 4"
+            }
+        ];
+
+        for(var i = 0; i < markers.length; i++)
+        {
+            marker = new google.maps.Marker({
+                position: markers[i].position,
+                map: map,
+                title: markers[i].title
+            });
+        }
+    }
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAP_API') }}&amp;libraries=places&amp;callback=initMap" async></script>
 @endsection
