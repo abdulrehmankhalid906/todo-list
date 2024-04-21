@@ -6,22 +6,39 @@
                 <div class="col-lg-4">
                     <div class="card mb-4">
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <p class="mb-0">Name:</p>
-                                </div>
-                                <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ Auth::user()->name }}</p>
+                            <div class="text-center mb-4 position-relative">
+                                <img src="{{ asset('dashboard/images/vilnius.jpeg') }}" alt="User Image" class="img-fluid rounded-circle" style="width: 160px; height: 160px;">
+                                <div class="upload-icon" id="image-upload">
+                                    <i class="fas fa-camera"></i>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <p class="mb-0">Email:</p>
+
+                            <form action="{{ route('update-user', Auth::user()->id) }}" method="POST">
+                                @csrf
+                                @method('PUT')
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <p class="mb-0">Name:</p>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <input type="text" class="form-control form-control-sm" name="name" id="name" value="{{ Auth::user()->name ?? '' }}">
+                                    </div>
                                 </div>
-                                <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ Auth::user()->email }}</p>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <p class="mb-0">Email:</p>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <input type="email" class="form-control form-control-sm" name="email" id="email" value="{{ Auth::user()->email ?? '' }}">
+                                    </div>
                                 </div>
-                            </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12 mt-2">
+                                        <input type="submit" class="btn btn-primary btn-sm" value="Update">
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -39,7 +56,7 @@
 
     <main>
         <div class="container-fluid px-4">
-            <h3 class="mt-4">{{ Auth::user()->name }}'s Tasks</h3>
+            <h4 class="mt-4">{{ Auth::user()->name }}'s Tasks</h4>
 
             <div class="card">
                 <div class="card-body">
@@ -54,16 +71,7 @@
 
                             </tr>
                         </thead>
-                        <tfoot>
-                            <tr>
-                                <th>#</th>
-                                <th>Title</th>
-                                <th>Description</th>
-                                <th>Task Status</th>
-                                <th>Action</th>
-
-                            </tr>
-                        </tfoot>
+                       
                         <tbody>
                             {{-- @dd($users); --}}
                             @foreach ($tasks as $task)
@@ -97,8 +105,12 @@
 
     <script>
         $(document).ready(function(){
-
             initMap();
+        });
+
+
+        $('#image-upload').click(function(){
+            alert('asdasdsa');
         });
 
         //Map Integration

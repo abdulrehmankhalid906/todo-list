@@ -64,12 +64,16 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        //Client IP
+        $clientIp = request()->ip();
+        
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'lat' => rand(10.110,120.140),
-            'lng' => rand(15.210,120.220)
+            'ip' => $clientIp,
+            'lat' => rand(10.110,90.90),
+            'lng' => rand(15.210,90.90)
         ]);
     }
 }
