@@ -16,11 +16,12 @@ class HomeController extends Controller
 
     public function index()
     {
+        $users= User::all();
         $user = User::count();
         $task = Task::count();
         $pendingtask = Task::where('is_completed', '0')->count();
         $completedtask = Task::where('is_completed', '1')->count();
-        return view('home', compact('user','task','pendingtask','completedtask'));
+        return view('home', compact('user','task','pendingtask','completedtask','users'));
     }
 
     public function viewTasks()

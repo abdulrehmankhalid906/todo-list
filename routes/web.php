@@ -9,6 +9,7 @@ use App\Http\Controllers\ProfileController;
 
 //Homepage
 Route::get('/',[TaskController::class, 'Homepage']);
+
 Route::get('/getTasks',[TaskController::class, 'searchTasks'])->name('searchTasks');
 
 //Tasks Route
@@ -27,6 +28,7 @@ Route::delete('/all-tasks/{id}',[HomeController::class, 'destroy'])->name('delet
 Route::get('/all-users',[HomeController::class, 'viewUsers'])->name('view-Users');
 Route::delete('/all-users/{id}',[HomeController::class, 'destroyUser'])->name('delete-Users');
 Route::put('/update-user/{id}', [HomeController::class, 'updateUserData'])->name('update-user');
-Auth::routes();
-
+Auth::routes([
+    'verify' => true
+]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

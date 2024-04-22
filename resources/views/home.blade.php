@@ -4,6 +4,7 @@
     <div class="container-fluid px-4">
         <h3 class="mt-2">Dashboard</h3>
         <div class="row">
+            {{-- {{ $users }} --}}
             <div class="col-xl-3 col-md-6">
                 <div class="card bg-primary text-white mb-4">
                     <div class="card-body">Total Users - <small>{{ $user }}</small></div>
@@ -65,7 +66,11 @@
     //we use let for globally access.
     let maps;
     let activeInfowindow;
-    let markers = [];
+    var markers = <?php echo json_encode($users); ?>;  //This is how we get the php collection in the javascript
+
+    console.log(markers);
+    // let markers = [];
+
 
     function initMap()
     {
@@ -74,34 +79,37 @@
             zoom: 5,
         });
 
-        var markers = [
-            {
-                position: { lat: 39.8103, lng: 69.4125 },
-                title: "User 1"
-            },
+        // var markers = [
+        //     {
+        //         position: { lat: 39.8103, lng: 69.4125 },
+        //         title: "User 1"
+        //     },
 
-            {
-                position: { lat: 41.8103, lng: 68.4125 },
-                title: "User 2"
-            },
+        //     {
+        //         position: { lat: 41.8103, lng: 68.4125 },
+        //         title: "User 2"
+        //     },
 
-            {
-                position: { lat: 45.8103, lng: 65.4125 },
-                title: "User 3"
-            },
+        //     {
+        //         position: { lat: 45.8103, lng: 65.4125 },
+        //         title: "User 3"
+        //     },
 
-            {
-                position: { lat: 42.8103, lng: 62.4125 },
-                title: "User 4"
-            }
-        ];
+        //     {
+        //         position: { lat: 42.8103, lng: 62.4125 },
+        //         title: "User 4"
+        //     }
+        // ];
 
         for(var i = 0; i < markers.length; i++)
         {
+            var user = markers[i];
+            var postion = { lat: parseFloat(user.lat), lng: parseFloat(user.lng) };
+
             marker = new google.maps.Marker({
-                position: markers[i].position,
+                position: postion,
                 map: map,
-                title: markers[i].title
+                title: user.name
             });
         }
     }
