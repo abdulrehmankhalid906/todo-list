@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -32,3 +33,8 @@ Auth::routes([
     'verify' => true
 ]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+//Outside API Calls.
+Route::get('/api-products',[ApiController::class, 'getProductApi'])->name('product-api');

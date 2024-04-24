@@ -27,6 +27,11 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                     All Tasks
                 </a>
+                <div class="sb-sidenav-menu-heading">API Calls</div>
+                <a class="nav-link" href="{{ route('product-api') }}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                    Products
+                </a>
             </div>
         </div>
         <div class="sb-sidenav-footer">
