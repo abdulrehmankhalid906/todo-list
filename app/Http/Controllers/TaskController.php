@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -15,20 +16,12 @@ class TaskController extends Controller
         return view('welcome', compact('tasks'));
     }
 
-    public function searchTasks(Request $request)
-    {
-        $task = Task::with('assignedTo')->where('title', 'LIKE', '%'.$request->searching.'%')
-        ->orWhere('description', 'LIKE', '%'.$request->searching.'%')->get();
-
-        return response()->json([
-            'task' => $task,
-        ]);
-    }
-
     public function index()
     {
         $users = User::all();
-        $tasks = Task::with('users')->get();
+        $tasks = Task::with(['users','assignedTo'])->where('user_id', Auth::user()->id)->get();
+
+        // dd($tasks);
 
         return view('tasks.create-task',[
             'tasks' => $tasks,
@@ -60,7 +53,7 @@ class TaskController extends Controller
     public function show($id)
     {
         $users = User::all();
-        $task = Task::findorFail($id);
+        $task = Task::where('user_id', Auth::user()->id)->findorFail($id);
         return view('tasks.edit',[
             'task' => $task,
             'users' => $users,
@@ -81,6 +74,16 @@ class TaskController extends Controller
         ]);
 
         return redirect('create-task')->with('success','Post Updated Successfully!');
+    }
+
+    public function searchTasks(Request $request)
+    {
+        $task = Task::with('assignedTo')->where('title', 'LIKE', '%'.$request->searching.'%')
+        ->orWhere('description', 'LIKE', '%'.$request->searching.'%')->get();
+
+        return response()->json([
+            'task' => $task,
+        ]);
     }
 
 }

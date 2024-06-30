@@ -38,7 +38,7 @@
 
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Assigned To:</label>
-                                        <select class="form-select" aria-label="Default select example" name="assigned_to" id="assigned_to">
+                                        <select class="form-select" aria-label="Default select example" name="assigned_to" id="assigned_to" {{ $task->is_completed == '1' ? 'disabled' : '' }}>
                                             @if(count($users)>0)
                                                 @foreach ($users as $user)
                                                     <option value="{{ $user->id }}" {{ $user->id == $task->assigned_to ? 'selected' : '' }}>{{ $user->name }}</option>

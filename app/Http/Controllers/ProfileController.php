@@ -10,15 +10,8 @@ class ProfileController extends Controller
 {
     public function myprofile()
     {
-        $userAuth = Auth::user();
-        $users = Task::whereHas('users', function ($query) use ($userAuth) {
-            $query->where('id', $userAuth->id);
-        })->get();
-
-        //other way
-        // $tasks = $user->tasks;
-
-
+        $users = Task::where('assigned_to', Auth::user()->id)->get();
+        
         return view('profile.myprofile',[
             'tasks' => $users,
         ]);
